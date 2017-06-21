@@ -6,6 +6,13 @@
 
 shopt -s checkwinsize
 
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent > ~/.ssh-agent-thing
+fi
+if [[ "$SSH_AGENT_PID" == "" ]]; then
+    eval "$(<~/.ssh-agent-thing)"
+fi
+
 # Soft Dependencies:
 # - git
 # - python and pip 3.6.x
